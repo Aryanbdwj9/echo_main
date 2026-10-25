@@ -1,5 +1,7 @@
 const express = require('express')
 const app = express();
+const cors = require("cors");
+app.use(cors());
 
 require("dotenv").config()
 
@@ -19,11 +21,13 @@ if(get_list_of_stocks.ok){
 
     const array_stocks = await get_list_of_stocks.json();
 
+
 res.status(200).send(array_stocks);
+
 
 }
 else {
-    throw new error ("smth went wrong")
+    throw new Error ("smth went wrong")
 }
 }
     catch(error)
