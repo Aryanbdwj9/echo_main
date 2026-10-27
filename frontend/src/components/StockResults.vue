@@ -1,7 +1,15 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router';
 
+
+
+const router = useRouter()
+
+function stock_details(symbol:string){
+    router.push(`/stocks/${symbol}`)
+}
 
 
 type Stock = {
@@ -36,7 +44,7 @@ const array_of_stocks = computed(() => props.stocks.slice(0, 10))
 
 
 <tbody>
-    <tr v-for="stock in array_of_stocks" :key="`${stock.symbol}-${stock.exchange}`">
+    <tr v-for="stock in array_of_stocks" :key="`${stock.symbol}-${stock.exchange}`" @click="stock_details(stock.symbol)">
         <td>{{stock.symbol}}</td>
         <td>{{stock.name}}</td>
         <td>{{stock.currency}}</td>

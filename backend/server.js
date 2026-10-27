@@ -40,4 +40,41 @@ else {
 });
 
 
+app.get("/stock/details/:symbol", async (req,res)=>
+{
+try {
+    const stock_symbol = req.params.symbol ;
+    const stock_details_url = `https://financialmodelingprep.com/stable/profile?symbol=${stock_symbol}&apikey=${apikey}`;
+
+
+    const stock_details = await fetch(stock_details_url);
+    if(stock_details.ok)
+    {
+        const stock_info = await stock_details.json();
+        res.status(200).send(stock_info);
+    }
+    else
+        {
+        throw new Error ;
+    }
+}
+catch{
+    res.status(500).send("smth went wrong");
+}
+} );
+
 app.listen(5001);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
